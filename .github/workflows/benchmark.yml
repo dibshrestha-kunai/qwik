@@ -2,8 +2,8 @@ name: Qwik Benchmarks
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main]  
+  workflow_dispatch:     
 
 permissions:
   contents: write
@@ -32,8 +32,11 @@ jobs:
       - name: Run benchmarks
         run: node scripts/benchmarks/runBenchmarks.cjs
 
-      - name: Show output
+      - name: Show benchmark output
         run: cat benchmark-results.json
+
+      - name: Reset local changes before uploading
+        run: git reset --hard
 
       - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
