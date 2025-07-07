@@ -31,7 +31,7 @@ function runRuntimeBenchmark() {
   const results = [];
 
   const buildStart = performance.now();
-  execSync('pnpm build', { stdio: 'inherit' });
+  execSync('pnpm build.local', { stdio: 'inherit' });
   const buildEnd = performance.now();
   results.push({
     name: 'Build Time',
