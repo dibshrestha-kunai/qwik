@@ -1,9 +1,9 @@
 name: Qwik Benchmarks
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,8 +19,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 8 # match Qwik's version
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,13 +29,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run Benchmarks
+      - name: Run benchmarks
         run: node scripts/benchmarks/runBenchmarks.js
 
-      - name: Show Output
+      - name: Show output
         run: cat benchmark-results.json
 
-      - name: Upload Results to GitHub Pages
+      - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
         with:
           name: Qwik CI Benchmarks
