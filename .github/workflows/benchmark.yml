@@ -30,7 +30,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run benchmarks
-        run: node scripts/benchmarks/runBenchmarks.js
+        run: node scripts/benchmarks/runBenchmarks.cjs
 
       - name: Show output
         run: cat benchmark-results.json
