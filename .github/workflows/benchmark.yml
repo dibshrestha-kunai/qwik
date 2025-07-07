@@ -2,8 +2,8 @@ name: Qwik Benchmarks
 
 on:
   push:
-    branches: [main]  
-  workflow_dispatch:     
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -35,8 +35,14 @@ jobs:
       - name: Show benchmark output
         run: cat benchmark-results.json
 
-      - name: Reset local changes before uploading
+      - name: Reset local changes
         run: git reset --hard
+
+      - name: Clean up build files before uploading
+        run: |
+          rm -rf node_modules
+          rm -f pnpm-lock.yaml
+          rm -f package.json
 
       - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
