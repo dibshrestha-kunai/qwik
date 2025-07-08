@@ -41,8 +41,10 @@ jobs:
       - name: Reset local changes
         run: git reset --hard
 
-      - name: Disable pnpm Git checks to allow commit
-        run: pnpm config set git-checks false
+      - name: Disable pnpm Git checks (prevents CI commit errors)
+        run: |
+          git config --global core.hooksPath /dev/null
+          pnpm config set git-checks false
 
       - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
