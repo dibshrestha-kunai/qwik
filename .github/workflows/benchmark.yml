@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Qwik core (ensures /dist exists)
+      - name: Build Qwik core (ensure dist exists)
         run: pnpm build.local --qwik
 
       - name: Run benchmarks
@@ -41,7 +41,8 @@ jobs:
       - name: Reset local changes
         run: git reset --hard
 
-      # ✅ Do NOT clean package.json etc.
+      - name: Disable pnpm Git checks to allow commit
+        run: pnpm config set git-checks false
 
       - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
