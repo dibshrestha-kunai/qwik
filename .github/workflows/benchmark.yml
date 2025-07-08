@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build Qwik core (ensures /dist exists)
+        run: pnpm build.local --qwik
+
       - name: Run benchmarks
         run: node scripts/benchmarks/runBenchmarks.cjs
 
@@ -38,11 +41,7 @@ jobs:
       - name: Reset local changes
         run: git reset --hard
 
-      - name: Clean up build files before uploading
-        run: |
-          rm -rf node_modules
-          rm -f pnpm-lock.yaml
-          rm -f package.json
+      # ✅ Do NOT clean package.json etc.
 
       - name: Upload benchmark results to GitHub Pages
         uses: benchmark-action/github-action-benchmark@v1
